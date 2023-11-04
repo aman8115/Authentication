@@ -1,0 +1,15 @@
+require('dotenv').config()
+const express = require('express')
+const cors = require('cors')
+const app = express()
+const cookieParser = require('cookie-parser')
+
+const dbconnected = require('./config/config.js')
+app.use(express.json())
+app.use(express.urlencoded({extended:true}))
+app.use(cors())
+dbconnected()
+app.use(cookieParser())
+const routers = require('./Router/router.js')
+app.use('/',routers)
+module.exports = app 
